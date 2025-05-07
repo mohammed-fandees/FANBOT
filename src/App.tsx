@@ -891,44 +891,6 @@ You can get an API key at openrouter.ai/keys. Once you've added your key, I'll b
     inputRef.current?.focus();
   };
 
-  // Clear current chat
-  const clearCurrentChat = () => {
-    if (!currentChat) return;
-    
-    const clearedChat: Chat = {
-      ...currentChat,
-      messages: [
-        {
-          id: 'system',
-          role: 'system',
-          content: systemMessage,
-          date: new Date()
-        },
-        {
-          id: 'greeting-new',
-          role: 'assistant',
-          content: 'Chat cleared. How else can I help you?',
-          date: new Date()
-        }
-      ],
-      lastActivity: new Date()
-    };
-    
-    setChats(prevChats => prevChats.map(chat => 
-      chat.id === currentChatId ? clearedChat : chat
-    ));
-    
-    setInput('');
-    setShowSuggestions(true);
-    setSuggestions([
-      "Tell me about the latest AI developments",
-      "Help me write a professional email",
-      "Explain quantum computing simply"
-    ]);
-    
-    showNotification('Chat history cleared');
-  };
-
   // Delete a chat
   const deleteChat = (chatId: string) => {
     const updatedChats = chats.filter(chat => chat.id !== chatId);
